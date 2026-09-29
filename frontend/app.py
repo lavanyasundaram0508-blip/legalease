@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import google.generativeai as genai
 
-# API Key - Streamlit Cloud + Local rendu ku work aagum
+# API Key fix
 try:
     api_key = st.secrets["GEMINI_API_KEY"]
 except:
@@ -20,6 +20,7 @@ query = st.text_input("What do you want to know?")
 if st.button("Simplify"):
     if uploaded and query:
         text = uploaded.read().decode('utf-8', errors='ignore')[:4000]
+        # NEW MODEL - 100% work aagum
         model = genai.GenerativeModel("gemini-2.0-flash")
         prompt = f"Explain this legal doc in simple English: {text}. Question: {query}"
         response = model.generate_content(prompt)
