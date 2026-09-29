@@ -21,7 +21,7 @@ if st.button("Simplify"):
     if uploaded and query:
         text = uploaded.read().decode('utf-8', errors='ignore')[:4000]
         # NEW MODEL - 100% work aagum
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel("gemini-flash_latest")
         prompt = f"Explain this legal doc in simple English: {text}. Question: {query}"
         response = model.generate_content(prompt)
         st.success(response.text)
