@@ -1,10 +1,14 @@
 import streamlit as st
 import os
-from dotenv import load_dotenv
 import google.generativeai as genai
 
-load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# API Key - Streamlit Cloud + Local rendu ku work aagum
+try:
+    api_key = st.secrets["GEMINI_API_KEY"]
+except:
+    api_key = os.getenv("GEMINI_API_KEY")
+
+genai.configure(api_key=api_key)
 
 st.set_page_config(page_title="LegalEase AI", page_icon="⚖️")
 st.title("⚖️ LegalEase AI - Legal Document Simplifier")
@@ -21,4 +25,4 @@ if st.button("Simplify"):
         response = model.generate_content(prompt)
         st.success(response.text)
     else:
-        st.warning("File and question kudunga da!")
+        st.warning("File and question rendu kudunga da!")
